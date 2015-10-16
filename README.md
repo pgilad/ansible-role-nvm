@@ -25,7 +25,7 @@ None
 ```yml
 - hosts: servers
     roles:
-      - pgilad.ansible-role-nvm
+      - pgilad.nvm
 ```
 
 ## License
