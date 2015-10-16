@@ -1,7 +1,7 @@
 ---
 language: python
 python: 2.7
-sudo: false
+sudo: required
 
 before_install:
   - sudo apt-get update -qq
@@ -14,7 +14,6 @@ script:
 
   - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
 
-  # Run the role/playbook again, checking to make sure it's idempotent.
   - >
     ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
     | grep -q 'changed=1.*failed=0'
