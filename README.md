@@ -1,5 +1,8 @@
 # ansible-role-nvm
+
 > An Ansible role to install and setup nvm
+
+[![Build Status](http://img.shields.io/travis/pgilad/ansible-role-nvm.svg?style=flat)](https://travis-ci.org/pgilad/ansible-role-nvm)
 
 ## Requirements
 
