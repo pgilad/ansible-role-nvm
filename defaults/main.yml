@@ -1,0 +1,8 @@
+---
+nvm_version: master
+nvm_repository: https://github.com/creationix/nvm.git
+nvm_install_path: /home/{{ ansible_ssh_user }}/.nvm
+nvm_set_aliases:
+  - { source: default, target: stable }
+nvm_install_versions:
+  - stable

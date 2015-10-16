@@ -1,0 +1,34 @@
+---
+- name: ensure required packages are present
+  sudo: yes
+  apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - git
+    - curl
+    - build-essential
+    - libssl-dev
+  tags: nvm
+
+- name: ensure nvm is installed
+  git: repo={{ nvm_repository }} dest={{ nvm_install_path }} version={{ nvm_version }}
+  tags: nvm
+
+- name: ensure nvm is sourced on profile load
+  lineinfile: >
+    dest=~/.profile
+    line="source {{ nvm_install_path }}/nvm.sh"
+    create=yes
+  tags: nvm
+
+- name: ensure nvm installs requested versions
+  sudo: yes
+  shell: . {{ nvm_install_path}}/nvm.sh && nvm install {{ item }}
+  with_items: nvm_install_versions
+  register: install_output
+  changed_when: not (install_output.stderr | search('already installed'))
+  tags: nvm
+
+- name: ensure nvm sets requested aliases
+  shell: . {{ nvm_install_path}}/nvm.sh && nvm alias {{ item.source }} {{ item.target }}
+  with_items: nvm_set_aliases
+  tags: nvm

@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Gilad Peleg
+  description: Install nvm and Node.js
+  license: MIT
+  min_ansible_version: 1.4
+  platforms:
+    - name: Ubuntu
+      versions:
+      - precise
+      - quantal
+      - raring
+      - saucy
+    - name: Debian
+      versions:
+      - wheezy
+  categories:
+  - development
+  - packaging
+  - web
+dependencies: []
