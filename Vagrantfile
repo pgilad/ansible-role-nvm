@@ -1,12 +1,12 @@
 VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.box = 'ubuntu/trusty64'
     config.ssh.insert_key = false
-    config.vm.network :private_network, type: "dhcp"
+    config.vm.box_check_update = false
+    config.vm.box = 'ubuntu/trusty64'
+    config.vm.network :private_network, ip: '192.168.50.5'
 
     config.vm.provider :virtualbox do |v|
-        v.name = 'nvm_dev'
         v.memory = 1000
         v.cpus = 2
         v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define 'nvm' do |machine|
         machine.vm.provision :ansible do |ansible|
             ansible.playbook = 'tests/test.yml'
+            ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
         end
     end
 end
