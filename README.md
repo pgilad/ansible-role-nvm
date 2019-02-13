@@ -30,4 +30,4 @@ None
 
 ## License
 
-MIT @[Gilad Peleg](http://giladpeleg.com)
+MIT © [Gilad Peleg](https://www.giladpeleg.com)
